@@ -1,0 +1,284 @@
+:root {
+    --bg-dark: #020617;        /* Fundal foarte închis */
+    --bg-panel: #0f172a;       /* Fundal panouri */
+    --bg-card: #1e293b;        /* Fundal carduri interioare */
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-blue: #3b82f6;
+    --accent-hover: #2563eb;
+    --danger: #ef4444;
+    --border-color: #334155;
+    
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* --- Highlighting Culori (Stil Godot/Code) --- */
+.hl-blue { color: #60a5fa; font-family: monospace; background: rgba(96, 165, 250, 0.1); padding: 2px 4px; border-radius: 4px; }
+.hl-red { color: #f87171; font-family: monospace; background: rgba(248, 113, 113, 0.1); padding: 2px 4px; border-radius: 4px; }
+.hl-green { color: #4ade80; font-family: monospace; background: rgba(74, 222, 128, 0.1); padding: 2px 4px; border-radius: 4px; }
+.hl-yellow { color: #facc15; font-family: monospace; background: rgba(250, 204, 21, 0.1); padding: 2px 4px; border-radius: 4px; }
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    width: 90vw;
+    max-width: 1400px;
+    height: 85vh;
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+/* Loading */
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 320px;
+    background-color: #0b1120;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"], textarea {
+    flex: 1;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px 12px;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: var(--accent-blue);
+}
+
+/* Legenda din UI */
+.format-legend {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+    margin-bottom: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.format-legend span { font-size: 0.75rem; }
+
+/* Noua clasă pentru textarea auto-resize */
+textarea.auto-resize {
+    resize: none;
+    overflow-y: hidden;
+    min-height: 42px;
+    line-height: 1.4;
+}
+
+.btn-primary {
+    background-color: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary:hover { background-color: var(--accent-hover); }
+
+.item-list {
+    list-style: none;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.list-item:hover { background-color: var(--bg-card); }
+.list-item.active { border-color: var(--accent-blue); background-color: var(--bg-card); }
+.list-item.completed span { text-decoration: line-through; color: var(--text-muted); }
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+    transition: color 0.2s;
+}
+
+.icon-btn:hover { color: var(--text-main); }
+.icon-btn.text-danger:hover { color: var(--danger); }
+
+/* --- Main Content --- */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+}
+
+.empty-icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.5; }
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.todo-header-left { display: flex; align-items: center; gap: 15px; }
+.todo-header-left h1 { font-size: 1.5rem; }
+.todo-header-left.completed h1 { text-decoration: line-through; color: var(--text-muted); }
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--accent-blue);
+}
+
+.card-creation {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.card-creation input[id="cardTitleInput"] { margin-bottom: 10px; width: 100%; }
+.card-creation-row { display: flex; gap: 10px; align-items: flex-start;}
+
+.cards-list { display: flex; flex-direction: column; gap: 15px; }
+
+.todo-card {
+    background-color: #111827;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.todo-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.todo-card-title { font-weight: 600; font-size: 1.1rem; }
+.todo-card-desc { color: var(--text-muted); line-height: 1.5; font-size: 0.95rem; white-space: pre-wrap; }
+
+/* --- Modal --- */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden { display: none; }
+
+.modal-content { 
+    background-color: var(--bg-panel); 
+    padding: 30px; 
+    border-radius: 12px; 
+    width: 650px; /* Mărit de la 400px */
+    max-width: 90vw;
+    border: 1px solid var(--border-color); 
+}
+
+#modalInput2 {
+    min-height: 180px; /* Face zona de scris mult mai înaltă */
+    resize: vertical;
+}
+
+.modal-content h3 { margin-bottom: 20px; }
+.modal-content input, .modal-content textarea { width: 100%; margin-bottom: 15px; }
+
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn-secondary:hover { background-color: var(--bg-card); }
+
+.hidden { display: none !important; }

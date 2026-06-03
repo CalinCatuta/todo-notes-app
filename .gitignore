@@ -1,0 +1,34 @@
+# Node.js și dependințe de Frontend
+node_modules/
+dist/
+
+# Rust și build-uri Tauri (Fișiere grele generate automat)
+src-tauri/target/
+src-tauri/gen/
+
+# Baza de date locală (Nu vrem să urcăm notițele tale personale pe internet)
+data.json
+src-tauri/data.json
+src-tauri/src/data.json
+*.json.bak
+
+# Fișiere de sistem
+.DS_Store
+Thumbs.db
+
+# Fișiere cu variabile de mediu (dacă vei folosi pe viitor)
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+

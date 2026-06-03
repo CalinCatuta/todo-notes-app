@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Iconițe gratuite Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    
+    
+    <div class="app-container">
+        <!-- Sidebar (Stânga) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <button id="btnBack" class="icon-btn hidden"><i class="ph ph-arrow-left"></i></button>
+                <h2 id="sidebarTitle">Categories</h2>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="sidebarInput" placeholder="Category name...">
+                <button id="sidebarAddBtn" class="btn-primary"><i class="ph ph-plus"></i></button>
+            </div>
+
+            <ul id="sidebarList" class="item-list">
+                <!-- Elementele vor fi generate din JS -->
+            </ul>
+        </aside>
+
+        <!-- Main Content (Dreapta) -->
+        <main class="main-content">
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state">
+                <i class="ph ph-kanban empty-icon"></i>
+                <p>Select or create a Category to manage your Todos.</p>
+            </div>
+
+            <!-- Todo Content -->
+            <div id="todoContent" class="todo-content hidden">
+                <div class="todo-header">
+                    <div class="todo-header-left">
+                        <input type="checkbox" id="todoCheck" class="custom-checkbox">
+                        <h1 id="todoTitle">Todo Name</h1>
+                    </div>
+                    <div class="todo-actions">
+                        <button id="todoEditBtn" class="icon-btn"><i class="ph ph-pencil-simple"></i></button>
+                        <button id="todoDeleteBtn" class="icon-btn text-danger"><i class="ph ph-trash"></i></button>
+                    </div>
+                </div>
+
+                <div class="card-creation">
+                    <input type="text" id="cardTitleInput" placeholder="Describe title">
+                    <div class="card-creation-row">
+                        <!-- Acum este textarea pentru auto-resize -->
+                        <textarea id="cardDescInput" class="auto-resize" rows="1" placeholder="Describe the steps that completed the Todo"></textarea>
+                        <button type="button" id="addCardBtn" class="btn-primary"><i class="ph ph-plus"></i></button>
+                    </div>
+                    <div class="format-legend">
+                        <b>Culori:</b>
+                        <span><span class="hl-blue">`text`</span> (Albastru)</span>
+                        <span><span class="hl-red">~text~</span> (Roșu)</span>
+                        <span><span class="hl-green">@text@</span> (Verde)</span>
+                        <span><span class="hl-yellow">^text^</span> (Galben)</span>
+                    </div>
+                </div>
+
+                <div id="cardsList" class="cards-list">
+                    <!-- Cardurile vor fi generate din JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Editare -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Edit Item</h3>
+            <input type="text" id="modalInput1" placeholder="Title/Name">
+            <textarea id="modalInput2" placeholder="Description (for cards)" class="hidden"></textarea>
+            <div class="format-legend">
+                        <b>Culori:</b>
+                        <span><span class="hl-blue">`text`</span> (Albastru)</span>
+                        <span><span class="hl-red">~text~</span> (Roșu)</span>
+                        <span><span class="hl-green">@text@</span> (Verde)</span>
+                        <span><span class="hl-yellow">^text^</span> (Galben)</span>
+                    </div>
+            <div class="modal-actions">
+                <button type="button" id="modalCancelBtn" class="btn-secondary">Cancel</button>
+                <button type="button" id="modalSaveBtn" class="btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmare Ștergere -->
+    <div id="deleteModal" class="modal hidden">
+        <div class="modal-content" style="width: 400px; text-align: center;">
+            <h3>Are you sure?</h3>
+            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.5;">This action cannot be undone. Do you really want to delete this item?</p>
+            <div class="modal-actions" style="justify-content: center;">
+                <button type="button" id="deleteCancelBtn" class="btn-secondary">Cancel</button>
+                <button type="button" id="deleteConfirmBtn" class="btn-primary" style="background-color: var(--danger);">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
