@@ -2,7 +2,6 @@
 
 O aplicație nativă de desktop rapidă, ușoară și sigură pentru gestionarea task-urilor și a notițelor complexe. Construită cu **Tauri** și **Rust** pentru performanță maximă, având o amprentă de memorie extrem de mică (un instalator de sub 10MB).
 
-Interfața este creată special pentru productivitate, inspirată din designul documentațiilor de cod (ex: Godot Engine), permițând formatarea notițelor direct din tastatură.
 
 ## ✨ Funcționalități
 
