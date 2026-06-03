@@ -1,6 +1,8 @@
 name: Build Linux App
 on:
   workflow_dispatch: # Îți permite să pornești build-ul manual din interfața GitHub
+permissions:
+  contents: write # Necesar pentru a crea release-ul
 
 jobs:
   build-linux:
@@ -17,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
