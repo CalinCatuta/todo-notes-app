@@ -1,0 +1,37 @@
+name: Build Linux App
+on:
+  workflow_dispatch: # Îți permite să pornești build-ul manual din interfața GitHub
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Frontend Dependencies
+        run: npm install
+
+      - name: Build Tauri App
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: v1.0.0 # Poți schimba versiunea aici
+          releaseName: 'Todo App v1.0.0 Linux'
+          releaseBody: 'Aceasta este versiunea de Linux a aplicației.'
+          releaseDraft: true
+          prerelease: false
