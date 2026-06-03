@@ -24,3 +24,20 @@ Interfața este creată special pentru productivitate, inspirată din designul d
 ## 🚀 Cum să rulezi proiectul local (Development)
 
 Pentru a contribui sau a modifica codul sursă, ai nevoie de **Node.js** și **Rust** instalate pe sistemul tău.
+
+2. Pornirea aplicației în modul Dev
+Acest script va porni sistemul de hot-reloading și va compila automat codul Rust:
+
+Bash
+```
+npm run tauri dev
+```
+📦 Cum să compilezi aplicația (.exe)
+Dacă vrei să generezi fișierul .exe pentru Windows, gata de instalat, rulează comanda:
+
+Bash
+```
+npm run tauri build
+```
+Odată terminat procesul de build (poate dura câteva minute prima dată, deoarece Rust optimizează codul), vei găsi instalatorul aplicației în:
+src-tauri/target/release/bundle/
